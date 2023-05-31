@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Ejecutar código</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+  <button id="crear-carpeta">Crear carpeta</button>
+  <div id="listado-carpetas"></div>
+
+  <script>
+    // Obtener el listado de carpetas y mostrarlo en la página
+    function obtenerListadoCarpetas() {
+      $.get('/listado-carpetas', function(data) {
+        $('#listado-carpetas').text(data);
+      });
+    }
+
+    // Manejar el clic del botón para crear una carpeta
+    $('#crear-carpeta').click(function() {
+      $.get('/crear-carpeta', function(data) {
+        console.log(data);
+        obtenerListadoCarpetas(); // Actualizar el listado de carpetas después de crear una nueva
+      });
+    });
+
+    // Obtener el listado de carpetas al cargar la página
+    $(document).ready(function() {
+      obtenerListadoCarpetas();
+    });
+  </script>
+</body>
+</html>
